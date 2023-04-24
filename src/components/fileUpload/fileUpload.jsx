@@ -2,26 +2,21 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const FileUpload = () => {
-	const [csvfile, setCsvFile] = useState(null);
+	const [csvfile, setCsvFile] = useState("");
 	const [repeatation, setRepeatation] = useState(5);
 	const [gap, setGap] = useState(5);
 	const [uploadUrl, setUploadUrl] = useState(
-		"http://localhost:8000/fileupload"
+		"http://evaaidev.enginecal.com/event/v1/cai/fileupload"
 	);
 
 	const handleSubmit = async (e) => {
 		const formData = new FormData();
-
 		const backendUrl = "http://localhost:8000/fileupload";
-		const csvfile = e.target[0].files[0];
-		const formUploadUrl = e.target[1].value;
-		const repeatation = e.target[2].value;
-		const gap = e.target[3].value;
 
 		formData.append("csvfile", csvfile);
 		formData.append("repeatation", repeatation);
 		formData.append("gap", gap);
-		formData.append("uploadUrl", formUploadUrl);
+		formData.append("uploadUrl", uploadUrl);
 
 		try {
 			const { data } = await axios.post(backendUrl, formData);
