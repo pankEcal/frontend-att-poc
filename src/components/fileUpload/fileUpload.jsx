@@ -8,13 +8,18 @@ const FileUpload = () => {
 	const [uploadUrl, setUploadUrl] = useState(
 		"http://evaaidev.enginecal.com/event/v1/cai/fileupload"
 	);
+	const map1 = new Map();
+	map1.set("passed", 0);
+	map1.set("failed", 0);
 
 	const makeHttpReq = async (backendUrl, formData, currentCount) => {
 		try {
 			const { data } = await axios.post(backendUrl, formData);
 			console.log(currentCount + 1, data);
+			map1.set("passed", map1.get("passed") + 1);
 		} catch (error) {
 			console.log(error.message);
+			map1.set("failed", map1.get("failed") + 1);
 			// console.log(error.response.data.message);
 		}
 	};
@@ -32,6 +37,7 @@ const FileUpload = () => {
 		const executeBatchRequests = setInterval(() => {
 			if (currentCount >= repeatation) {
 				clearInterval(executeBatchRequests);
+				console.log(map1);
 				console.log("batch file upload completed!");
 			} else {
 				makeHttpReq(backendUrl, formData, currentCount);
