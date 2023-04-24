@@ -14,8 +14,10 @@ const PostIndividual = () => {
 		const message = target[2].value;
 
 		try {
-			await axios.post(backendUrl, { url, status, message });
-			// the default server response will be passed as 404 message so it gives data on error side only
+			const serverRes = await axios.post(backendUrl, { url, status, message });
+			const { data } = serverRes;
+
+			console.log(data);
 		} catch (error) {
 			const {
 				response: { data },
