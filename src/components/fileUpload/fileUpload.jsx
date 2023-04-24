@@ -3,27 +3,41 @@ import axios from "axios";
 
 const FileUpload = () => {
 	const [csvfile, setCsvFile] = useState("");
-	const [repeatation, setRepeatation] = useState(5);
-	const [gap, setGap] = useState(5);
+	const [repeatation, setRepeatation] = useState(10);
+	const [gap, setGap] = useState(1000);
 	const [uploadUrl, setUploadUrl] = useState(
 		"http://evaaidev.enginecal.com/event/v1/cai/fileupload"
 	);
 
-	const handleSubmit = async (e) => {
+	const makeHttpReq = async (backendUrl, formData, currentCount) => {
+		try {
+			const { data } = await axios.post(backendUrl, formData);
+			console.log(currentCount + 1, data);
+		} catch (error) {
+			console.log(error.message);
+			// console.log(error.response.data.message);
+		}
+	};
+
+	const handleSubmit = async () => {
 		const formData = new FormData();
 		const backendUrl = "http://localhost:8000/fileupload";
+		let currentCount = 0;
 
 		formData.append("csvfile", csvfile);
 		formData.append("repeatation", repeatation);
 		formData.append("gap", gap);
 		formData.append("uploadUrl", uploadUrl);
 
-		try {
-			const { data } = await axios.post(backendUrl, formData);
-			console.log(data);
-		} catch (error) {
-			console.log(error.response.data.message);
-		}
+		const executeBatchRequests = setInterval(() => {
+			if (currentCount >= repeatation) {
+				clearInterval(executeBatchRequests);
+				console.log("batch file upload completed!");
+			} else {
+				makeHttpReq(backendUrl, formData, currentCount);
+				currentCount++;
+			}
+		}, gap);
 	};
 
 	return (
@@ -34,7 +48,7 @@ const FileUpload = () => {
 				<form
 					onSubmit={(e) => {
 						e.preventDefault();
-						handleSubmit(e);
+						handleSubmit();
 					}}
 				>
 					<input
