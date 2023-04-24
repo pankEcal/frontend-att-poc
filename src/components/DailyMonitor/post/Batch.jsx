@@ -7,15 +7,14 @@ const PostBatch = () => {
 
 	const handleSubmit = async (target) => {
 		const backendUrl = "http://localhost:8000/dailymonitor/batch";
-		const status = target[1].value;
-		const message = target[2].value;
+		const status = target[0].value;
+		const message = target[1].value;
 
 		try {
 			const serverRes = await axios.post(backendUrl, { status, message });
 			const { data } = serverRes;
 			console.log(data);
 		} catch (error) {
-			console.log("error");
 			console.log(error);
 		}
 	};
