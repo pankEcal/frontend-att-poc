@@ -1,11 +1,10 @@
 import "./App.css";
-import DailyMonitor from "./components/DailyMonitor/DailyMonitor.jsx";
+import DailyMonitor from "./components/dailyMonitor/DailyMonitor.jsx";
 
 function App() {
 	return (
 		<>
 			<div>
-				<h2>Daily Monitor</h2>
 				<DailyMonitor />
 			</div>
 		</>

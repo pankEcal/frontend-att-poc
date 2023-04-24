@@ -6,6 +6,7 @@ import PostBatch from "./post/Batch.jsx";
 const DailyMonitor = () => {
 	return (
 		<div>
+			<h2>Daily Monitor</h2>
 			<GetApis />
 			<PostIndividual />
 			<PostApplication />
