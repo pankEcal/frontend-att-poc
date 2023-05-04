@@ -1,0 +1,17 @@
+.basicFormInput,
+.requestParamsInput {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 2rem;
+	margin-top: 0.5rem;
+}
+
+input,
+select {
+	padding: 0.2rem 0.5rem;
+}
+
+input[type="text"] {
+	min-width: 200px;
+}

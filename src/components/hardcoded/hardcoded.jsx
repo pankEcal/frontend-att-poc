@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import "./Hardcoded.css";
 
 const BACKEND_URL = "http://localhost:8000/hardcoded";
 
@@ -7,19 +8,23 @@ const handleSubmit = async (event) => {
 	const baseUrl = event.target["baseUrl"].value;
 	const apiLink = event.target["apiLink"].value;
 	const requestMethod = event.target["requestMethod"].value;
+	const u = event.target["u"].value;
+	const p = event.target["p"].value;
 
 	const requestObj = {
 		baseUrl,
 		apiLink,
 		requestMethod,
 		requestParams: {
-			u: "saurabh.singh@enginecal.com",
-			p: "123456",
+			u,
+			p,
 		},
 		validationParams: {
 			userTypeId: "636f0a3a286eee60431ac912",
 		},
 	};
+
+	console.log(requestObj);
 
 	const { data } = await axios.post(BACKEND_URL, { ...requestObj });
 	console.log(data);
@@ -29,6 +34,8 @@ const Hardcoded = () => {
 	const [baseUrl, setBaseUrl] = useState("https://evaai.enginecal.com/");
 	const [apiLink, setApiLink] = useState("core/v1/bike-intell/checklogin");
 	const [requestMethod, setRequestMethod] = useState("POST");
+	const [u, setU] = useState("saurabh.singh@enginecal.com");
+	const [p, setP] = useState("123456");
 
 	return (
 		<div>
@@ -41,42 +48,75 @@ const Hardcoded = () => {
 						handleSubmit(e);
 					}}
 				>
-					<label htmlFor="baseUrl">baseUrl: </label>
-					<input
-						type="text"
-						name="baseUrl"
-						value={baseUrl}
-						onChange={(e) => {
-							setBaseUrl(e.target.value);
-						}}
-					/>
+					<div className="basicFormInput">
+						<div>
+							<label htmlFor="baseUrl">baseUrl: </label>
+							<input
+								type="text"
+								name="baseUrl"
+								value={baseUrl}
+								onChange={(e) => {
+									setBaseUrl(e.target.value);
+								}}
+							/>
+						</div>
 
-					<label htmlFor="apiLink">apiLink: </label>
-					<input
-						type="text"
-						name="apiLink"
-						value={apiLink}
-						onChange={(e) => {
-							setApiLink(e.target.value);
-						}}
-					/>
+						<div>
+							<label htmlFor="apiLink">apiLink: </label>
+							<input
+								type="text"
+								name="apiLink"
+								value={apiLink}
+								onChange={(e) => {
+									setApiLink(e.target.value);
+								}}
+							/>
+						</div>
 
-					<label htmlFor="requestMethod">requestMethod: </label>
-					<select
-						name="requestMethod"
-						value={requestMethod}
-						onChange={(e) => {
-							setRequestMethod(e.target.value);
-						}}
-					>
-						{["POST", "GET"].map((method, index) => {
-							return (
-								<option key={index} value={method}>
-									{method}
-								</option>
-							);
-						})}
-					</select>
+						<div>
+							<label htmlFor="requestMethod">requestMethod: </label>
+							<select
+								name="requestMethod"
+								value={requestMethod}
+								onChange={(e) => {
+									setRequestMethod(e.target.value);
+								}}
+							>
+								{["POST", "GET"].map((method, index) => {
+									return (
+										<option key={index} value={method}>
+											{method}
+										</option>
+									);
+								})}
+							</select>
+						</div>
+					</div>
+
+					<div className="requestParamsInput">
+						<div>
+							<label htmlFor="u">Email: </label>
+							<input
+								type="text"
+								name="u"
+								value={u}
+								onChange={(e) => {
+									setU(e.target.value);
+								}}
+							/>
+						</div>
+						<div>
+							<label htmlFor="u">Password: </label>
+							<input
+								type="password"
+								name="p"
+								value={p}
+								onChange={(e) => {
+									setP(e.target.value);
+								}}
+							/>
+						</div>
+					</div>
 
 					<button type="submit">Run Test</button>
 				</form>
