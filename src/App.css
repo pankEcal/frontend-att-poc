@@ -1,7 +1,21 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+	max-width: 1280px;
+	margin: 0 auto;
+	text-align: center;
 }
 
+#navBar {
+	width: 100%;
+	margin-bottom: 5rem;
+}
+
+#navBar ul li {
+	list-style: none;
+}
+
+#navBar ul {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5rem;
+}
