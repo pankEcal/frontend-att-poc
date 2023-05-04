@@ -5,7 +5,7 @@
 	align-items: center;
 	justify-content: flex-start;
 	gap: 2rem;
-	margin-top: 0.5rem;
+	margin: 1rem auto;
 }
 
 input,
@@ -15,4 +15,25 @@ select {
 
 input[type="text"] {
 	min-width: 200px;
+}
+
+.responseData {
+	margin-top: 2rem;
+}
+
+.responseData div {
+	background-color: hsl(3, 2%, 95%);
+	max-width: 80%;
+	margin: 1rem auto;
+	padding: 1rem;
+	border: 1px solid black;
+	overflow-wrap: break-word;
+	overflow-y: scroll;
+	max-height: 200px;
+	text-align: left;
+	border-radius: 3px;
+}
+
+samp {
+	color: rgb(26, 26, 26);
 }

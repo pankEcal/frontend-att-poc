@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import "./Hardcoded.css";
 
 const BACKEND_URL = "http://localhost:8000/hardcoded";
-const responseData = {};
 
 const handleSubmit = async (event) => {
 	const baseUrl = event.target["baseUrl"].value;
@@ -27,7 +26,7 @@ const handleSubmit = async (event) => {
 	};
 
 	const { data } = await axios.post(BACKEND_URL, { ...requestObj });
-	Object.assign(responseData, data);
+	return data;
 };
 
 const Hardcoded = () => {
@@ -37,6 +36,7 @@ const Hardcoded = () => {
 	const [u, setU] = useState("saurabh.singh@enginecal.com");
 	const [p, setP] = useState("123456");
 	const [success, setSuccess] = useState("true");
+	const [responseData, setResponseData] = useState(null);
 
 	return (
 		<div>
@@ -46,11 +46,14 @@ const Hardcoded = () => {
 				<form
 					onSubmit={(e) => {
 						e.preventDefault();
-						handleSubmit(e);
+						handleSubmit(e).then((data) => {
+							setResponseData(data);
+							console.log(data); // print response after handling submisson
+						});
 					}}
 				>
 					<div className="basicFormInput">
-						<h4>Basic Inputs: </h4>
+						<strong>Basic Inputs: </strong>
 						<div>
 							<label htmlFor="baseUrl">baseUrl: </label>
 							<input
@@ -96,7 +99,7 @@ const Hardcoded = () => {
 					</div>
 
 					<div className="requestParamsInput">
-						<h4>Request Params Inputs: </h4>
+						<strong>Request Params Inputs: </strong>
 						<div>
 							<label htmlFor="u">Email: </label>
 							<input
@@ -122,7 +125,7 @@ const Hardcoded = () => {
 					</div>
 
 					<div className="validationParamsInput">
-						<h4>Validation params Inputs: </h4>
+						<strong>Validation params Inputs: </strong>
 						<div>
 							<label htmlFor="validation-success">Success: </label>
 							<input
@@ -137,6 +140,15 @@ const Hardcoded = () => {
 					</div>
 					<button type="submit">Run Test</button>
 				</form>
+
+				{responseData && (
+					<div className="responseData">
+						<h3>Test Result</h3>
+						<div>
+							<samp>{JSON.stringify(responseData)}</samp>
+						</div>
+					</div>
+				)}
 			</div>
 		</div>
 	);
