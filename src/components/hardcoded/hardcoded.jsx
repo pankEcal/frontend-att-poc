@@ -1,13 +1,34 @@
 import { useState } from "react";
+import axios from "axios";
+
+const BACKEND_URL = "http://localhost:8000/hardcoded";
+
+const handleSubmit = async (event) => {
+	const baseUrl = event.target["baseUrl"].value;
+	const apiLink = event.target["apiLink"].value;
+	const requestMethod = event.target["requestMethod"].value;
+
+	const requestObj = {
+		baseUrl,
+		apiLink,
+		requestMethod,
+		requestParams: {
+			u: "saurabh.singh@enginecal.com",
+			p: "123456",
+		},
+		validationParams: {
+			userTypeId: "636f0a3a286eee60431ac912",
+		},
+	};
+
+	const { data } = await axios.post(BACKEND_URL, { ...requestObj });
+	console.log(data);
+};
 
 const Hardcoded = () => {
 	const [baseUrl, setBaseUrl] = useState("https://evaai.enginecal.com/");
 	const [apiLink, setApiLink] = useState("core/v1/bike-intell/checklogin");
 	const [requestMethod, setRequestMethod] = useState("POST");
-
-	const handleSubmit = async (event) => {
-		console.log(event);
-	};
 
 	return (
 		<div>
@@ -56,6 +77,7 @@ const Hardcoded = () => {
 							);
 						})}
 					</select>
+
 					<button type="submit">Run Test</button>
 				</form>
 			</div>
