@@ -24,9 +24,12 @@ const handleSubmit = async (event) => {
 			success: validationSuccess,
 		},
 	};
-
-	const { data } = await axios.post(BACKEND_URL, { ...requestObj });
-	return data;
+	try {
+		const { data } = await axios.post(BACKEND_URL, { ...requestObj });
+		return data;
+	} catch (error) {
+		return error;
+	}
 };
 
 const Hardcoded = () => {
