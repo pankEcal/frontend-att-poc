@@ -3,6 +3,7 @@ import axios from "axios";
 import "./Hardcoded.css";
 
 const BACKEND_URL = "http://localhost:8000/hardcoded";
+const responseData = {};
 
 const handleSubmit = async (event) => {
 	const baseUrl = event.target["baseUrl"].value;
@@ -10,6 +11,7 @@ const handleSubmit = async (event) => {
 	const requestMethod = event.target["requestMethod"].value;
 	const u = event.target["u"].value;
 	const p = event.target["p"].value;
+	const validationSuccess = event.target["validation-success"].value;
 
 	const requestObj = {
 		baseUrl,
@@ -20,14 +22,12 @@ const handleSubmit = async (event) => {
 			p,
 		},
 		validationParams: {
-			userTypeId: "636f0a3a286eee60431ac912",
+			success: validationSuccess,
 		},
 	};
 
-	console.log(requestObj);
-
 	const { data } = await axios.post(BACKEND_URL, { ...requestObj });
-	console.log(data);
+	Object.assign(responseData, data);
 };
 
 const Hardcoded = () => {
@@ -36,6 +36,7 @@ const Hardcoded = () => {
 	const [requestMethod, setRequestMethod] = useState("POST");
 	const [u, setU] = useState("saurabh.singh@enginecal.com");
 	const [p, setP] = useState("123456");
+	const [success, setSuccess] = useState("true");
 
 	return (
 		<div>
@@ -49,6 +50,7 @@ const Hardcoded = () => {
 					}}
 				>
 					<div className="basicFormInput">
+						<h4>Basic Inputs: </h4>
 						<div>
 							<label htmlFor="baseUrl">baseUrl: </label>
 							<input
@@ -94,6 +96,7 @@ const Hardcoded = () => {
 					</div>
 
 					<div className="requestParamsInput">
+						<h4>Request Params Inputs: </h4>
 						<div>
 							<label htmlFor="u">Email: </label>
 							<input
@@ -118,6 +121,20 @@ const Hardcoded = () => {
 						</div>
 					</div>
 
+					<div className="validationParamsInput">
+						<h4>Validation params Inputs: </h4>
+						<div>
+							<label htmlFor="validation-success">Success: </label>
+							<input
+								type="text"
+								name="validation-success"
+								value={success}
+								onChange={(e) => {
+									setSuccess(e.target.value);
+								}}
+							/>
+						</div>
+					</div>
 					<button type="submit">Run Test</button>
 				</form>
 			</div>
@@ -140,9 +157,6 @@ Inputs: baseUrl, apiLink, requestMethod, requestParams, validationParams
         "errorCode": "1002"
     }
 }
-
-
-
 */
 
 export default Hardcoded;
