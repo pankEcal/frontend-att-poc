@@ -28,7 +28,12 @@ const handleSubmit = async (event) => {
 		const { data } = await axios.post(BACKEND_URL, { ...requestObj });
 		return data;
 	} catch (error) {
-		return error;
+		const {
+			response: { data },
+		} = error;
+
+		// sending response received from server side only
+		return data;
 	}
 };
 
