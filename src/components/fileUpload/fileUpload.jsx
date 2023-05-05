@@ -18,9 +18,12 @@ const FileUpload = () => {
 			console.log(currentCount + 1, data);
 			map1.set("passed", map1.get("passed") + 1);
 		} catch (error) {
-			console.log(error.message);
+			const {
+				response: { data },
+			} = error;
+
 			map1.set("failed", map1.get("failed") + 1);
-			// console.log(error.response.data.message);
+			console.log(data);
 		}
 	};
 

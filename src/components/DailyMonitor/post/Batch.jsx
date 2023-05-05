@@ -15,7 +15,10 @@ const PostBatch = () => {
 			const { data } = serverRes;
 			console.log(data);
 		} catch (error) {
-			console.log(error);
+			const {
+				response: { data },
+			} = error;
+			console.log(data);
 		}
 	};
 

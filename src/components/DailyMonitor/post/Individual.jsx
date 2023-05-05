@@ -22,7 +22,6 @@ const PostIndividual = () => {
 			const {
 				response: { data },
 			} = error;
-
 			console.log(data);
 		}
 	};
