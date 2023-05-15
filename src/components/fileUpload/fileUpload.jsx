@@ -5,9 +5,9 @@ const FileUpload = () => {
 	const [csvfile, setCsvFile] = useState("");
 	const [repeatation, setRepeatation] = useState(10);
 	const [gap, setGap] = useState(1000);
-	const [uploadUrl, setUploadUrl] = useState(
-		"http://evaaidev.enginecal.com/event/v1/cai/fileupload"
-	);
+	const [baseUrl, setBaseUrl] = useState("http://evaaidev.enginecal.com/");
+	const [apiLink, setApiLink] = useState("event/v1/cai/fileupload");
+
 	const map1 = new Map();
 	map1.set("passed", 0);
 	map1.set("failed", 0);
@@ -29,13 +29,12 @@ const FileUpload = () => {
 
 	const handleSubmit = async () => {
 		const formData = new FormData();
-		const backendUrl = "http://localhost:8000/fileupload";
+		const backendUrl = "http://localhost:8000/hardcoded";
 		let currentCount = 0;
 
 		formData.append("csvfile", csvfile);
-		formData.append("repeatation", repeatation);
-		formData.append("gap", gap);
-		formData.append("uploadUrl", uploadUrl);
+		formData.append("baseUrl", baseUrl);
+		formData.append("apiLink", apiLink);
 
 		const executeBatchRequests = setInterval(() => {
 			if (currentCount >= repeatation) {
@@ -68,14 +67,26 @@ const FileUpload = () => {
 						}}
 					/>
 
-					<label htmlFor="uploadUrl">upload url</label>
+					<label htmlFor="baseUrl">base Url</label>
 					<input
 						type="text"
-						name="uploadUrl"
-						value={uploadUrl}
+						name="baseUrl"
+						value={baseUrl}
 						onChange={(e) => {
 							e.preventDefault();
-							setUploadUrl(e.target.value);
+							setBaseUrl(e.target.value);
+						}}
+					/>
+					<span>&nbsp; &nbsp; &nbsp; </span>
+
+					<label htmlFor="apiLink">api Link</label>
+					<input
+						type="text"
+						name="apiLink"
+						value={apiLink}
+						onChange={(e) => {
+							e.preventDefault();
+							setApiLink(e.target.value);
 						}}
 					/>
 					<span>&nbsp; &nbsp; &nbsp; </span>
@@ -90,7 +101,6 @@ const FileUpload = () => {
 						}}
 						name="repeatation"
 					/>
-
 					<span>&nbsp; &nbsp; &nbsp; </span>
 
 					<label htmlFor="gap">gap &nbsp;</label>
