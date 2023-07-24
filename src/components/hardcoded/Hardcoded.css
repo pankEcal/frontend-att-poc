@@ -1,39 +1,39 @@
 .basicFormInput,
 .requestParamsInput,
 .validationParamsInput {
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
-	gap: 2rem;
-	margin: 1rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2rem;
+  margin: 1rem auto;
 }
 
 input,
 select {
-	padding: 0.2rem 0.5rem;
+  padding: 0.2rem 0.5rem;
 }
 
 input[type="text"] {
-	min-width: 200px;
+  min-width: 200px;
 }
 
 .responseData {
-	margin-top: 2rem;
+  margin-top: 2rem;
 }
 
 .responseData div {
-	background-color: hsl(3, 2%, 95%);
-	max-width: 80%;
-	margin: 1rem auto;
-	padding: 1rem;
-	border: 1px solid black;
-	overflow-wrap: break-word;
-	overflow-y: scroll;
-	max-height: 200px;
-	text-align: left;
-	border-radius: 3px;
+  background-color: hsl(3, 2%, 95%);
+  max-width: 80%;
+  margin: 1rem auto;
+  padding: 1rem;
+  border: 1px solid black;
+  overflow-wrap: break-word;
+  overflow-y: scroll;
+  max-height: 200px;
+  text-align: left;
+  border-radius: 3px;
 }
 
-samp {
-	color: rgb(26, 26, 26);
+pre {
+  color: rgb(26, 26, 26);
 }
