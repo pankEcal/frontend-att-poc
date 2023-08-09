@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import "./Hardcoded.css";
 
@@ -49,6 +49,31 @@ const Hardcoded = () => {
   return (
     <div>
       <h2>Hardcoded</h2>
+
+      <div>
+        <input
+          type="radio"
+          name="baseUrl"
+          id="prodBaseUrl"
+          value={"https://evaai.enginecal.com/"}
+          onChange={(e) => {
+            setBaseUrl(e.target.value);
+          }}
+        />
+        <label htmlFor="prodBaseUrl">Prod</label>
+        <br />
+        <input
+          type="radio"
+          name="baseUrl"
+          id="devBaseUrl"
+          value={"http://evaaidev.enginecal.com/"}
+          onChange={(e) => {
+            setBaseUrl(e.target.value);
+          }}
+        />
+        <label htmlFor="devBaseUrl">Dev</label>
+      </div>
+
       <div>
         <hr />
         <form
